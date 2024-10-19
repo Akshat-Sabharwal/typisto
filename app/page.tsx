@@ -52,7 +52,7 @@ const Landing = () => {
 
   return (
     <div className="flex justify-center items-center h-screen w-screen overflow-hidden">
-      {window.innerWidth < 1400 ? (
+      {document.documentElement.clientWidth < 800 ? (
         <div className="min-h-[30vh] md:min-h-[40vh] min-w-[40vw] max-w-[95vw] bg-secondary rounded-xl flex justify-center items-center px-8 md:px-16 text-center text-xl md:text-3xl text-primary">
           <h1>
             <span className="text-accent">Typist</span> isn't compatible with
