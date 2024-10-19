@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
+
+* {
+  font-family: "Roboto Mono", monospace;
+  user-select: none;
+}
+
+html,
+body {
+  background-color: #262626;
+}
+
+.hstack {
+  @apply flex flex-row justify-center items-center;
+}
+
+.vstack {
+  @apply flex flex-col justify-start items-center;
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+}
