@@ -3,8 +3,8 @@ import "./globals.css";
 import { Providers } from "@/components/Providers";
 
 export const metadata: Metadata = {
-  title: "Typist",
-  description: "Typing speed",
+  title: "Typisto",
+  description: "Typing speed app",
 };
 
 export default function RootLayout({

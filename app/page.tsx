@@ -17,7 +17,6 @@ const Landing = () => {
   const { status } = useSession();
 
   useEffect(() => {
-    console.log(process.env);
     if (typeof window !== "undefined") {
       const start = async (e: KeyboardEvent) => {
         if (e.key === "Enter" && !ran) {
