@@ -2,7 +2,7 @@ import { Client } from "pg";
 
 export const sql = async (query: string) => {
   const client = new Client({
-    connectionString: process.env.POSTGRES_DEV,
+    connectionString: process.env.POSTGRES_PROD,
   });
 
   await client.connect();

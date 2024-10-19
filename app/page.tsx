@@ -7,7 +7,6 @@ import { TypeTest } from "@/components/TypeTest";
 import { useAnimate } from "framer-motion";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import { FaSpinner } from "react-icons/fa";
 
 const Landing = () => {
   const [landingScope, landingAnimate] = useAnimate();
@@ -15,7 +14,7 @@ const Landing = () => {
 
   const [ran, setRan] = useState(false);
 
-  const { data: session, status } = useSession();
+  const { status } = useSession();
 
   useEffect(() => {
     console.log(process.env);
