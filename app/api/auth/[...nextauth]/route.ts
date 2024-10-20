@@ -1,9 +1,10 @@
-// import { createClient, createPool, sql } from "@vercel/postgres";
 import { sql } from "@/db/config";
 import { randomUUID } from "crypto";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import Github from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
+
+console.log(process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_CLIENT_SECRET);
 
 const authConfig: NextAuthOptions = {
   providers: [
@@ -18,7 +19,7 @@ const authConfig: NextAuthOptions = {
   ],
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    signIn: async ({ user, account, profile, email, credentials }) => {
+    signIn: async ({ user }) => {
       if (!user.email || !user.image || !user.email) {
         return false;
       }
@@ -28,7 +29,7 @@ const authConfig: NextAuthOptions = {
       );
 
       if (res.rowCount === 0) {
-        const res = await sql(
+        await sql(
           `INSERT INTO users VALUES('${randomUUID()}', '${user.name}', '${
             user.email
           }', '${user.image}')`
