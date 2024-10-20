@@ -83,7 +83,7 @@ const Account: React.FC = () => {
 
   return (
     <>
-      <div className="flex flex-col min-h-screen w-screen justify-start items-center py-8 text-center">
+      <div className="flex flex-col min-h-screen w-screen justify-start items-center pt-8 text-center">
         <h1
           className="text-accent text-5xl self-start ml-20 mt-4 mb-12 cursor-pointer"
           onClick={() => router.push("/")}
