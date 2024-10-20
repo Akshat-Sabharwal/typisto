@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/table";
 import { useSession } from "next-auth/react";
 import { RxAvatar } from "react-icons/rx";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FaTrash } from "react-icons/fa";
 
 interface StatBlockProps {
@@ -161,6 +161,7 @@ export const ChartBlock: React.FC<ChartBlockProps> = ({ data: history }) => {
 
 export const TableBlock: React.FC<TableBlockProps> = ({ data }) => {
   const { data: session } = useSession();
+  const [sortedData, setSortedData] = useState<THistory[]>([]);
 
   const deleteHistory = async () => {
     const user = await fetch(`/api/user/${session?.user?.email}`).then(
@@ -172,9 +173,15 @@ export const TableBlock: React.FC<TableBlockProps> = ({ data }) => {
     });
   };
 
-  const sortedData = data
-    ?.slice()
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  useEffect(() => {
+    setSortedData(
+      data
+        ?.slice()
+        .sort(
+          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+        ) as THistory[]
+    );
+  }, [data?.length, data]);
 
   return (
     <div className="flex flex-col justify-evenly items-start w-full my-8">
