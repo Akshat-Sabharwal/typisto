@@ -102,6 +102,8 @@ export const StatBlock: React.FC<StatBlockProps> = ({ data, stats }) => {
 };
 
 export const ChartBlock: React.FC<ChartBlockProps> = ({ data: history }) => {
+  const [sortedData, setSortedData] = useState<THistory[]>([]);
+
   history?.forEach(
     (item) =>
       (item.month = [
@@ -119,6 +121,17 @@ export const ChartBlock: React.FC<ChartBlockProps> = ({ data: history }) => {
         "Dec",
       ].at(new Date(item.date).getMonth()))
   );
+
+  useEffect(() => {
+    setSortedData(
+      history
+        ?.slice()
+        .sort(
+          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+        ) as THistory[]
+    );
+  }, [history?.length, history]);
+
   return (
     <div className="flex flex-col justify-start items-start w-full mt-8">
       <p className="text-primary text-4xl mb-5">Graphical Interpretation</p>
@@ -137,7 +150,7 @@ export const ChartBlock: React.FC<ChartBlockProps> = ({ data: history }) => {
           >
             <BarChart
               accessibilityLayer
-              data={history?.reverse()}
+              data={sortedData}
               maxBarSize={50}
               barGap={5}
               className="text-xl"
