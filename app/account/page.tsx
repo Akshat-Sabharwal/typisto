@@ -2,7 +2,6 @@
 
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { RxAvatar } from "react-icons/rx";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { FaSpinner } from "react-icons/fa";

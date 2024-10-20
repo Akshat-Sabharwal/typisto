@@ -11,7 +11,6 @@ import { Bar, BarChart, Legend, XAxis, YAxis } from "recharts";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -173,11 +172,9 @@ export const TableBlock: React.FC<TableBlockProps> = ({ data }) => {
     });
   };
 
-  useEffect(() => {
-    data?.sort(
-      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-    );
-  }, [data?.length]);
+  const sortedData = data
+    ?.slice()
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
   return (
     <div className="flex flex-col justify-evenly items-start w-full my-8">
@@ -189,7 +186,7 @@ export const TableBlock: React.FC<TableBlockProps> = ({ data }) => {
         />
       </div>
       <hr className="border-2 border-secondary w-full mb-8" />
-      {data?.length === 0 ? (
+      {sortedData?.length === 0 ? (
         <p className="text-secondary text-2xl">No history to display!</p>
       ) : (
         <div className="mb-16 w-full">
@@ -203,8 +200,8 @@ export const TableBlock: React.FC<TableBlockProps> = ({ data }) => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {data &&
-                data.map((item: THistory, index: number) => (
+              {sortedData &&
+                sortedData.map((item: THistory, index: number) => (
                   <TableRow key={index} className="hover:bg-hover">
                     <TableCell className="font-medium text-left">
                       {item.wpm}
